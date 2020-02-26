@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios'
+import './utils/todo.css'
 
 const PAGINATION_URL = 'http://127.0.0.1:8000/api/posts/';
 export default class ListPost extends Component {
@@ -106,6 +107,18 @@ export default class ListPost extends Component {
         return (
             <div>
                 <h1 align="center">Lista de posts</h1>
+
+                <div className="pagination">
+                    <a href="#">&laquo;</a>
+                    
+                    <a href="#">1</a>
+                    <a className="active" href="#">2</a>
+                    <a href="#">3</a>
+                    
+                    
+                    <a href="#">&raquo;</a>
+                </div>
+
                 <Table className="" aria-label="simple table">
                     <TableHead>
                         <TableRow>
