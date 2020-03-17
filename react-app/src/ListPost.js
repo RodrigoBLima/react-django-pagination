@@ -10,7 +10,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios'
 import './utils/todo.css'
 
-const PAGINATION_URL = 'http://127.0.0.1:8000/api/posts/';
+const PAGINATION_URL = 'http://127.0.0.1:8001/api/posts/';
+
+
 export default class ListPost extends Component {
     constructor(props) {
         super(props);
@@ -79,28 +81,57 @@ export default class ListPost extends Component {
                 "publish": "2020-02-26T19:38:01.602653Z"
             }
             ],
-            count: 0,
+            links: ''
+            // links: {
+            //     "next": null,
+            //     "previous": "http://127.0.0.1:8001/api/posts/"
+            // },
+
 
         }
-        this.handleDelete = this.handleDelete.bind(this)
+        // this.handleDelete = this.handleDelete.bind(this)
+        // this.handleUpdate = this.handleUpdate.bind(this)
+
     }
 
-    componentWillMount() {
-        console.log('will');
-        console.log(PAGINATION_URL);
-        axios.get(PAGINATION_URL)
+    componentDidMount() {
+        this.loadPosts(PAGINATION_URL)
+    }
+
+    loadPosts = async (url) => {
+       await axios.get(url)
             .then((res) => {
                 console.log(res.data);
                 this.setState({
-                    posts: res.data
+                    posts: res.data,
+                    links: res.data.links,
                 })
 
             })
     }
     handleDelete = (id) => {
         console.log(id);
-        // let DELETE_URL = PAGINATION_URL + id;
-        // console.log(DELETE_URL)
+        let DELETE_URL = PAGINATION_URL + id;
+        console.log(DELETE_URL)
+    }
+
+    handleUpdate = (post) => {
+        console.log(post)
+
+    }
+
+    prevPage = () => {
+        // let toPage = this.state.links.previous
+        console.log(this.state.links.previous)
+        // this.loadPosts(toPage);
+    }
+
+    nextPage = () => {
+
+        // let toPage = this.state.links.next
+        console.log(this.state.links.next)
+
+        // this.loadPosts(toPage);
     }
 
     render() {
@@ -110,12 +141,11 @@ export default class ListPost extends Component {
 
                 <div className="pagination">
                     <a href="#">&laquo;</a>
-                    
-                    <a href="#">1</a>
-                    <a className="active" href="#">2</a>
-                    <a href="#">3</a>
-                    
-                    
+
+                    <a href="#" onClick={this.prevPage}>Anterior</a>
+                    <a href="#" onClick={this.nextPage}>Próximo</a>
+
+
                     <a href="#">&raquo;</a>
                 </div>
 
@@ -129,21 +159,20 @@ export default class ListPost extends Component {
                             <TableCell>Ações</TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>                        
-                        {this.state.posts.map(function (post) {
+                    <TableBody>
+                        {this.state.posts.map((post) => {
                             return <>
-                                <TableRow>
+                                <TableRow key={post.id}>
 
                                     <TableCell>{post.title}</TableCell>
                                     <TableCell>{post.author}</TableCell>
                                     <TableCell>{post.body}</TableCell>
                                     <TableCell>{post.publish}</TableCell>
                                     <TableCell>
-                                    {/* onClick={(e) => this.handleDelete(e,post.id)} */}
-                                        <IconButton aria-label="delete">
+                                        <IconButton aria-label="delete" onClick={() => this.handleDelete(post.id)}>
                                             <DeleteIcon />
                                         </IconButton>
-                                        <IconButton aria-label="update">
+                                        <IconButton aria-label="update" onClick={() => this.handleUpdate(post)}>
                                             <CloudUploadIcon />
                                         </IconButton>
                                     </TableCell>

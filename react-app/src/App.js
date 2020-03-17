@@ -6,7 +6,7 @@ import axios from 'axios';
 import ListPost from './ListPost'
 
 
-const POST_URL = 'http://127.0.0.1:8000/api/posts/';
+const POST_URL = 'http://127.0.0.1:8001/api/posts/';
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -23,9 +23,31 @@ export default class App extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
+  formData() {
+    let form_data = new FormData();
+
+    // title: '',
+    //   author: '',
+    //   body: '',
+    //   publish: '',
+
+    form_data.append('title', this.state.title)
+    form_data.append('author', this.state.author)
+    form_data.append('body', this.state.body)
+    form_data.append('publish', this.state.publish)
+
+    return form_data
+  }
+
   handleSave(e) {
     e.preventDefault();
-    axios.post(POST_URL)
+
+    axios({
+      method: 'POST',
+      url: POST_URL,
+      data: this.formData(),
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
       .then((res) => {
         console.log(res.status);
         if (res.status === 200) {
@@ -87,12 +109,18 @@ export default class App extends Component {
             name="publish"
             onChange={this.handleChange}
           /><br /><br />
-          <Button variant="contained"
+          {/* <Button variant="contained"
             color="primary"
             size="small"
             className=""
             startIcon={<SaveIcon />}
-          >Salvar </Button>
+          >Salvar </Button> */}
+
+          <input
+            type="submit"
+          /><br /><br />
+
+
         </form>
 
         <ListPost />
