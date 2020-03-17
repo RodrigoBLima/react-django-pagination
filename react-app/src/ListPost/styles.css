@@ -1,0 +1,62 @@
+
+.posts-list .pagination button {
+    margin: 20px auto 0;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 0;
+    background: #1ED760;
+    color: #fff;
+    cursor: pointer;
+}
+
+.posts-list .pagination button[disabled] {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.posts-list .pagination button[disabled]:hover {
+    opacity: 0.5;
+
+}
+
+.posts-list .pagination button:hover {
+    opacity: 0.7;
+}
+
+.posts-list .pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+
+
+.posts-list   a {
+    height: 52px;
+    background: none;
+    border: 2px solid #1ED760;
+    border-radius: 5px;
+    color: #1ED760;
+    font-weight: bold;
+    text-decoration: none;
+    display: contents   ;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.posts-list  a:hover {
+    background:#1ED760;
+    color: #fff;
+
+}
+
+.posts-list .content {
+    background-color: #fff;
+    color: black;
+    max-width: 820px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+}

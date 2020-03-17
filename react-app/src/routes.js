@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import App from './App';
-import ListPost from './ListPost';
-import FormPost from './FormPost';
+
+import ListPost from './ListPost/index';
+import FormPost from './Posts/index';
 
 
 const Router = () => (
