@@ -20,6 +20,16 @@ from myApp.viewsets import Index
 
 router = routers.DefaultRouter()                      
 router.register(r'posts', Index, 'Posts')
+urlpatterns = router.urls
+
+
+
+
+# from rest_framework.routers import DefaultRouter
+
+# router = DefaultRouter()
+# router.register(r'users', UserViewSet, basename='user')
+#
 
 urlpatterns = [
     path('admin/', admin.site.urls),
